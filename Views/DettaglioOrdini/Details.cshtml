@@ -1,0 +1,42 @@
+﻿@model PizzeriaNana.Models.DettaglioOrdini
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DettaglioOrdini</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ordini.Indirizzo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ordini.Indirizzo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prodotti.NomeP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prodotti.NomeP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantità)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantità)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdDettaglio }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

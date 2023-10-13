@@ -38,7 +38,6 @@
 
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Menu", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Carrello", "Index", "DettaglioOrdini", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
 
@@ -46,9 +45,9 @@
                     else
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Menu", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })</li>
+                       
                         <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Carrello", "Index", "DettaglioOrdini", new { area = "" }, new { @class = "nav-link" })</li>
+                        
 
                         <li>@Html.ActionLink("Registrati ", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }

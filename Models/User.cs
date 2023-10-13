@@ -20,7 +20,7 @@ namespace PizzeriaNana.Models
         public string Password { get; set; }
 
         [StringLength(50)]
-        [Display(Name = "Ruolo? admin")]
+        [Display(Name = "Ruolo")]
         public string Role { get; set; }
     }
 }

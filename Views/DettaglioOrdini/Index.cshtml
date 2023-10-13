@@ -3,43 +3,51 @@
 @{
     ViewBag.Title = "Index";
 }
+<h2>Carrello</h2>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ordini.Indirizzo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prodotti.NomeP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantità)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ordini.Indirizzo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prodotti.NomeP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantità)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdDettaglio }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdDettaglio }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdDettaglio })
-        </td>
-    </tr>
+@if (User.IsInRole("admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
+else { }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ordini.Indirizzo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prodotti.NomeP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantità)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ordini.Indirizzo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prodotti.NomeP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantità)
+                </td>
+                @if (User.IsInRole("admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdDettaglio }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IdDettaglio }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdDettaglio })
+                    </td>
+                }
+               
+            </tr>
+        }
+
+    </table>

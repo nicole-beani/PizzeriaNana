@@ -12,12 +12,15 @@ namespace PizzeriaNana.Models
         public int Id { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Inserisci l'username")]
         public string Username { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Inserisci password")]
         public string Password { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Ruolo? admin")]
         public string Role { get; set; }
     }
 }

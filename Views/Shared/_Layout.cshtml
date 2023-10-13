@@ -1,29 +1,47 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Applicazione ASP.NET</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Index.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border border-danger-subtle border-start-0 border-end-0 border-top-0  border-3">
         <div class="container">
-            @Html.ActionLink("Nome dell'applicazione", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+          <img src="~/Content/assets/img/Logo.png" style="width: 13%;"/>
+            
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("C", "Index", "Clienti", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("D", "Index", "DettaglioOrdini", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("O", "Index", "Ordini", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("P", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Menu", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Dettagli Ordini", "Index", "DettaglioOrdini", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Lista Ordini", "Index", "Ordini", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Lista Prodotti", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Lista Clienti", "Index", "Clienti", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    else
+                    {
+
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Menu", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Carrello", "Index", "DettaglioOrdini", new { area = "" }, new { @class = "nav-link" })</li>
+
+                        <li>@Html.ActionLink("Registrazione Admin", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
             </div>
         </div>
@@ -33,6 +51,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET</p>
+            
         </footer>
     </div>
 

@@ -12,6 +12,7 @@ namespace PizzeriaNana.Models
         [Key]
         public int IdDettaglio { get; set; }
 
+        [Display(Name = "Scegli la pizza che vuoi:")]
         public int? IdProdotto { get; set; }
 
         public int? Quantità { get; set; }

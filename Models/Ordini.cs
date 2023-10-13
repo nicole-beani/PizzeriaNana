@@ -17,18 +17,19 @@ namespace PizzeriaNana.Models
 
         [Key]
         public int IdOrdine { get; set; }
-
+        [Display(Name = "Per quando la vuoi ordinare? -> gg/mm/dd")]
         public DateTime? DataOrdine { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? Importo { get; set; }
 
         [StringLength(50)]
+
         public string Indirizzo { get; set; }
 
         [StringLength(50)]
         public string Nota { get; set; }
-
+        [Display(Name = "Inserisci il tuo Nome")]
         public int? IdCliente { get; set; }
 
         public virtual Clienti Clienti { get; set; }

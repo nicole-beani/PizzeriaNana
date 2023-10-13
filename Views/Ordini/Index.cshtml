@@ -4,11 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>}
+
 <table class="table">
     <tr>
         <th>
@@ -17,9 +19,7 @@
         <th>
             @Html.DisplayNameFor(model => model.DataOrdine)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Importo)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Indirizzo)
         </th>
@@ -29,29 +29,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Clienti.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataOrdine)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Importo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Indirizzo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nota)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdOrdine }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdOrdine }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdOrdine })
-        </td>
-    </tr>
-}
 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clienti.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataOrdine)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Indirizzo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nota)
+            </td>
+            @if (User.IsInRole("admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdOrdine }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdOrdine }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdOrdine })
+                </td>
+            }
+            else { }
+        </tr>
+    }
 </table>
+@if (User.IsInRole("admin"))
+{
+    @Html.ActionLink("Continua con l'ordine", "Create", "DettaglioOrdini", new { area = "" }, new { @class = "nav-link" })
+}

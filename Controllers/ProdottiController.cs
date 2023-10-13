@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -42,20 +43,38 @@ namespace PizzeriaNana.Controllers
         }
 
         // POST: Prodotti/Create
-        // Per la protezione da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-        // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProdotto,NomeP,Costo,TempoConsegna,Ingredienti")] Prodotti prodotti)
+        public ActionResult Create(Prodotti p, HttpPostedFileBase Foto)
         {
             if (ModelState.IsValid)
             {
-                db.Prodotti.Add(prodotti);
+
+
+                if (Foto != null && Foto.ContentLength > 0)
+                {
+                    string nomeFile = Foto.FileName;
+                    string path = Path.Combine(Server.MapPath("~/Content/assets/img"), nomeFile);
+                    Foto.SaveAs(path);
+                    p.Foto = nomeFile;
+                }
+                else
+                {
+                    p.Foto = "";
+
+                }
+                db.Prodotti.Add(p);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else
+            {
+                ViewBag.Error = "Per favore fai le cose per bene";
 
-            return View(prodotti);
+                return View();
+            }
+
         }
 
         // GET: Prodotti/Edit/5
@@ -78,7 +97,7 @@ namespace PizzeriaNana.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdProdotto,NomeP,Costo,TempoConsegna,Ingredienti")] Prodotti prodotti)
+        public ActionResult Edit([Bind(Include = "IdProdotto,NomeP,Costo,TempoConsegna,Ingredienti, Foto")] Prodotti prodotti)
         {
             if (ModelState.IsValid)
             {

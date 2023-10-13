@@ -19,16 +19,20 @@ namespace PizzeriaNana.Models
         public int IdProdotto { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Nome della pizza:")]
         public string NomeP { get; set; }
 
         [Column(TypeName = "money")]
+        [Display(Name = "Prezzo:")]
         public decimal? Costo { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Tempo di consegna stimata:")]
         public string TempoConsegna { get; set; }
 
         [StringLength(50)]
         public string Ingredienti { get; set; }
+        public string Foto { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DettaglioOrdini> DettaglioOrdini { get; set; }

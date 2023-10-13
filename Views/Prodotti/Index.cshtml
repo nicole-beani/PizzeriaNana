@@ -4,48 +4,38 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NomeP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Costo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TempoConsegna)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ingredienti)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Costo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TempoConsegna)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ingredienti)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdProdotto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdProdotto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdProdotto })
-        </td>
-    </tr>
+@if (User.IsInRole("admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
+else { }
 
-</table>
+
+  
+    <div  style="width: 80rem;">
+        <ul class="list-group list-group-flush">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item border-light">  <img class="w-25" src="~/Content/assets/img/@item.Foto" /></li>
+                <li class="list-group-item border-light"> @Html.DisplayNameFor(model => model.NomeP) @Html.DisplayFor(modelItem => item.NomeP)</li>
+                <li class="list-group-item border-light"> @Html.DisplayNameFor(model => model.Ingredienti): @Html.DisplayFor(modelItem => item.Ingredienti)</li>
+                <li class="list-group-item border-light"> @Html.DisplayNameFor(model => model.Costo) @Html.DisplayFor(modelItem => item.Costo)</li>
+                <li class="list-group-item border-2 border-dark  border-start-0 border-end-0">  @Html.DisplayNameFor(model => model.TempoConsegna) @Html.DisplayFor(modelItem => item.TempoConsegna)</li>
+
+               
+                if (User.IsInRole("admin"))
+                {
+                    <li class="list-group-item">   @Html.ActionLink("Details", "Details", new { id = item.IdProdotto })</li>
+                    <li class="list-group-item">   @Html.ActionLink("Edit", "Edit", new { id = item.IdProdotto }) </li>
+                    <li class="list-group-item">   @Html.ActionLink("Delete", "Delete", new { id = item.IdProdotto })</li>
+    }
+                
+    else {<li class="list-group-item">   @Html.ActionLink("Scopri di più", "Details", new { id = item.IdProdotto })</li> }
+            }
+
+        </ul>
+        
+    </div>
